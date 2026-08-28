@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="About EduSupplies – our mission, team, and commitment to quality school stationery & textbooks." />
+    <title>About Us | EduSupplies</title>
+    <link rel="icon" type="image/jpeg" href="/images/edu-favicon.jpg" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet" />
+    <style>
+        /* ----- RESET & VARIABLES (Royal Blue / Black / White) ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --text-main: #111111;
+            --text-heading: #111111;
+            --card-bg: #FFFFFF;
+            --border-light: #E2E8F0;
+            --accent-blue: #2563EB;
+            --accent-dark: #111111;
+            --navbar-bg: #111111;
+
+            --royal: #2563EB;
+            --deep: #111111;
+            --white: #FFFFFF;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #111111;
+            --bg-secondary: #1E1E1E;
+            --text-main: #EAEAEA;
+            --text-heading: #FAFAFA;
+            --card-bg: #222222;
+            --border-light: #3A3A3A;
+            --accent-blue: #3B82F6;
+            --accent-dark: #000000;
+            --navbar-bg: #000000;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.5;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-heading);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        a { text-decoration: none; }
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* ----- NAVBAR (identical structure) ----- */
+        .navbar-container {
+            background-color: var(--navbar-bg);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border-bottom: 1px solid #2f2f2f;
+            padding: 0.75rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: transform 0.2s;
+        }
+        .logo:hover { transform: scale(1.05); }
+        .logo-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--royal);
+            overflow: hidden;
+        }
+        .logo-icon i {
+            color: var(--royal);
+            font-size: 2rem;
+        }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+        .logo-text span { color: var(--royal); }
+        .logo-tagline {
+            font-size: 0.625rem;
+            color: #ccc;
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        /* desktop nav */
+        .desktop-nav {
+            display: none;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .nav-link {
+            color: #e0e0e0;
+            padding: 0.5rem 0.875rem;
+            transition: 0.2s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .nav-link:hover {
+            color: #FAFAFA;
+            background-color: #2a2a2a;
+            border-radius: 30px;
+        }
+        .nav-link.active {
+            color: #FAFAFA;
+            font-weight: 600;
+            background: var(--royal);
+            border-radius: 30px;
+        }
+        /* dropdown */
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #1c1c1c;
+            border: 1px solid #333;
+            border-radius: 16px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: 0.3s;
+            z-index: 1000;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: #ccc;
+            transition: 0.2s;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .dropdown-item:hover {
+            background-color: var(--royal);
+            color: #fff;
+            padding-left: 28px;
+            border-radius: 12px;
+        }
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            transition: 0.2s;
+        }
+        .dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+
+        /* desktop right icons */
+        .navbar-right-desktop {
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .icon-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        .icon-btn:hover {
+            background-color: var(--royal);
+            color: var(--deep);
+        }
+        .login-btn {
+            background-color: var(--royal);
+            color: white;
+            padding: 0.625rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+        }
+        .login-btn:hover {
+            background-color: white;
+            color: var(--deep);
+        }
+
+        /* mobile menu button */
+        .mobile-menu-btn {
+            display: flex;
+            color: white;
+            font-size: 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* mobile menu overlay */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--deep);
+            z-index: 9999;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-menu.active { transform: translateX(0); }
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .mobile-menu-close {
+            color: white;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .mobile-menu-items {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 500;
+            border-bottom: 1px solid #2a2a2a;
+            transition: 0.2s;
+        }
+        .mobile-menu-item i {
+            color: var(--royal);
+            margin-right: 1rem;
+            width: 1.75rem;
+            font-size: 1.25rem;
+        }
+        .mobile-menu-item:hover {
+            background-color: #1f1f1f;
+            padding-left: 0.5rem;
+        }
+        .mobile-menu-item.active {
+            color: var(--royal);
+            font-weight: 700;
+            background-color: #1f1f1f;
+            padding-left: 0.5rem;
+        }
+        /* mobile dropdown */
+        .mobile-dropdown { border-bottom: 1px solid #2a2a2a; }
+        .mobile-dropdown-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 500;
+            padding: 1rem 0;
+            cursor: pointer;
+        }
+        .mobile-dropdown-btn i:first-child {
+            color: var(--royal);
+            margin-right: 1rem;
+            width: 1.75rem;
+            font-size: 1.25rem;
+        }
+        .mobile-dropdown-btn .fa-chevron-down {
+            color: var(--royal);
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #1a1a1a;
+            border-radius: 16px;
+            margin-bottom: 0.5rem;
+        }
+        .mobile-dropdown-content.active {
+            max-height: 200px;
+            padding: 0.75rem 0;
+        }
+        .mobile-dropdown-content a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem 0.75rem 3rem;
+            color: #ccc;
+            transition: 0.2s;
+            font-size: 1.1rem;
+        }
+        .mobile-dropdown-content a:hover {
+            background-color: var(--royal);
+            color: white;
+        }
+        .mobile-action-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 500;
+            border-bottom: 1px solid #2a2a2a;
+            transition: 0.2s;
+            background: transparent;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+        .mobile-action-item i {
+            color: var(--royal);
+            margin-right: 1rem;
+            width: 1.75rem;
+            font-size: 1.25rem;
+        }
+        .mobile-action-item:hover {
+            background-color: #1f1f1f;
+            padding-left: 0.5rem;
+        }
+        .mobile-separator {
+            margin: 1rem 0 0.5rem 0;
+            border-top: 2px solid #2f2f2f;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .btn-primary, .btn-outline {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: var(--royal);
+            color: white;
+            border: 2px solid var(--royal);
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--royal);
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--border-light);
+        }
+        .btn-outline:hover {
+            border-color: var(--royal);
+            color: var(--royal);
+        }
+
+        /* ----- ABOUT PAGE SPECIFIC SECTIONS ----- */
+        /* Section 1: Hero (about) */
+        .about-hero {
+            background-color: white;
+            min-height: 60vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+            padding-top: 100px;
+            padding-bottom: 3rem;
+        }
+        .about-hero .container { padding-top: 0; padding-bottom: 0; }
+        .about-hero-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.04;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22 width=%2240%22 height=%2240%22><path fill=%22%232563EB%22 d=%22M0 0 L40 40 M40 0 L0 40%22 stroke-width=%221%22 stroke=%22%23111111%22 opacity=%220.3%22 /></svg>');
+        }
+        .about-hero-grid {
+            display: grid;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media (min-width: 1024px) {
+            .about-hero-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .about-hero-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #111111;
+        }
+        @media (min-width: 640px) { .about-hero-title { font-size: 3.5rem; } }
+        @media (min-width: 768px) { .about-hero-title { font-size: 4rem; } }
+        .about-hero-title span { color: var(--royal); }
+        .about-hero-text {
+            font-size: 1.125rem;
+            color: #333;
+            margin-bottom: 2rem;
+            max-width: 540px;
+        }
+
+        /* Section 2: Mission & Vision */
+        .mission-section {
+            background-color: var(--bg-secondary);
+            padding: 5rem 0;
+        }
+        .mission-grid {
+            display: grid;
+            gap: 2.5rem;
+        }
+        @media (min-width: 768px) {
+            .mission-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .mission-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(37,99,235,0.12);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .mission-icon {
+            font-size: 3rem;
+            color: var(--royal);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Section 3: Values */
+        .values-section {
+            background-color: var(--bg-primary);
+            padding: 5rem 0;
+        }
+        .values-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (min-width: 768px) {
+            .values-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        .value-item {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: var(--card-bg);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(37,99,235,0.08);
+            transition: 0.2s;
+        }
+        .value-item:hover {
+            border-color: var(--royal);
+            transform: translateY(-6px);
+        }
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--royal);
+            margin-bottom: 1rem;
+        }
+
+        /* Section 4: Our Story / Timeline */
+        .story-section {
+            background-color: var(--bg-secondary);
+            padding: 5rem 0;
+        }
+        .story-grid {
+            display: grid;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            .story-grid { grid-template-columns: 1fr 1fr 1fr; }
+        }
+        .story-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            border-left: 6px solid var(--royal);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .story-year {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--royal);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Section 5: Team (extended) */
+        .team-about-section {
+            background-color: var(--bg-primary);
+            padding: 5rem 0;
+        }
+        .team-about-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (min-width: 768px) {
+            .team-about-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        .team-about-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(37,99,235,0.1);
+            transition: 0.2s;
+        }
+        .team-about-card:hover {
+            border-color: var(--royal);
+            transform: scale(1.02);
+        }
+        .team-about-img {
+            width: 6rem;
+            height: 6rem;
+            margin: 0 auto 0.75rem;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--royal);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Section 6: CTA / Contact */
+        .cta-section {
+            background-color: var(--royal);
+            padding: 5rem 0;
+            text-align: center;
+            color: white;
+        }
+        .cta-section h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .cta-section p {
+            font-size: 1.125rem;
+            max-width: 36rem;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        .cta-btn {
+            background-color: white;
+            color: var(--deep);
+            padding: 1rem 2.5rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-block;
+        }
+        .cta-btn:hover {
+            background-color: var(--deep);
+            color: white;
+        }
+
+        /* footer */
+        .footer {
+            background-color: var(--deep);
+            color: white;
+            padding: 4rem 0;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .footer-logo-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--royal);
+        }
+        .footer-logo-icon i { color: var(--royal); font-size: 2rem; }
+        .footer-logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+        .footer-logo-text span { color: var(--royal); }
+        .footer-tagline {
+            font-size: 0.625rem;
+            color: #ccc;
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        .footer-heading {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--royal);
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-links a {
+            color: #9ca3af;
+            transition: 0.2s;
+        }
+        .footer-links a:hover { color: var(--royal); }
+        .footer-input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 9999px;
+            margin-bottom: 0.5rem;
+            border: none;
+        }
+        .footer-btn {
+            width: 100%;
+            background-color: var(--royal);
+            color: white;
+            padding: 0.75rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .footer-btn:hover {
+            background-color: white;
+            color: var(--deep);
+        }
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+        #scroll-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--royal);
+            color: white;
+            border-radius: 50%;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            z-index: 100;
+            display: none;
+        }
+        #scroll-top:hover {
+            background-color: white;
+            color: var(--deep);
+        }
+        @media (min-width: 1280px) {
+            .desktop-nav { display: flex; }
+            .navbar-right-desktop { display: flex; }
+            .mobile-menu-btn { display: none; }
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.7s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        [style*="background-image"] {
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            opacity: 0.8;
+            max-width: 40rem;
+            margin: 0 auto 3rem;
+        }
+        @media (min-width: 768px) {
+            .section-title { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar-container">
+    <div class="container navbar-flex">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-book-open"></i></div>
+            <div>
+                <div class="logo-text">Edu<span>Supplies</span></div>
+                <span class="logo-tagline">learn & grow</span>
+            </div>
+        </a>
+        <div class="desktop-nav">
+            <div class="dropdown" id="Home-dropdown">
+                <div class="nav-link" onclick="toggleDesktopDropdown('Home-dropdown')">Home <i class="fas fa-chevron-down dropdown-arrow"></i></div>
+                <div class="dropdown-menu">
+                    <a href="index.html" class="dropdown-item"> Home I</a>
+                    <a href="home2.html" class="dropdown-item"> Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="nav-link active">About</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="product.html" class="nav-link">Product</a>
+            <a href="pricing.html" class="nav-link">Pricing</a>
+            <a href="faq.html" class="nav-link">FAQ</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        <div class="navbar-right-desktop">
+            <button class="icon-btn" id="desktop-theme-toggle"><i class="fas fa-circle-half-stroke" id="desktop-theme-icon"></i></button>
+            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-right-left"></i></button>
+            <a href="login.html" class="login-btn"> Login</a>
+            <a href="register.html" class="login-btn">Register</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-header">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-book-open"></i></div>
+            <div>
+                <div class="logo-text">Edu<span>Supplies</span></div>
+                <span class="logo-tagline">learn & grow</span>
+            </div>
+        </a>
+        <button class="mobile-menu-close" id="close-mobile-menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-menu-items">
+        <div class="mobile-dropdown">
+            <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('Home-mobile')">
+                <span>Home</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="Home-mobile" class="mobile-dropdown-content">
+                <a href="index.html"> Home I</a>
+                <a href="home2.html"> Home 2</a>
+            </div>
+        </div>
+        <a href="about.html" class="mobile-menu-item active">About</a>
+        <a href="services.html" class="mobile-menu-item">Services</a>
+        <a href="product.html" class="mobile-menu-item">Product</a>
+        <a href="pricing.html" class="mobile-menu-item">Pricing</a>
+        <a href="faq.html" class="mobile-menu-item">FAQ</a>
+        <a href="contact.html" class="mobile-menu-item">Contact</a>
+        <div class="mobile-separator"></div>
+        <button class="mobile-action-item" onclick="window.location.href='login.html'"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <button class="mobile-action-item" onclick="window.location.href='register.html'"><i class="fas fa-user-plus"></i> Register</button>
+        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-right-left"></i> RTL</button>
+        <button class="mobile-action-item" id="mobile-theme-toggle"><i class="fas fa-circle-half-stroke" id="mobile-theme-icon"></i> Theme</button>
+    </div>
+</div>
+
+<!-- ===== SECTION 1: ABOUT HERO ===== -->
+<section class="about-hero">
+    <div class="about-hero-pattern"></div>
+    <div class="container relative z-10">
+        <div class="about-hero-grid">
+            <div class="fade-in-up">
+                <span style="color: var(--royal); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 0.75rem;">📖 about us</span>
+                <h1 class="about-hero-title">Empowering <span>learners</span> everywhere</h1>
+                <p class="about-hero-text">We're a team of educators, designers, and supply experts dedicated to making quality stationery and textbooks accessible to every student.</p>
+                <div class="btn-group">
+                    <a href="#mission" class="btn-primary"><i class="fas fa-flag"></i> Our mission</a>
+                    <a href="#team" class="btn-outline"><i class="fas fa-users"></i> Meet the team</a>
+                </div>
+            </div>
+            <div class="hero-image order-1 lg:order-2" style="min-height:340px;">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" alt="Students learning" style="width:100%; height:100%; object-fit:cover;" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 2: MISSION & VISION ===== -->
+<section id="mission" class="mission-section">
+    <div class="container">
+        <h2 class="section-title">Why we <span style="color:var(--royal);">exist</span></h2>
+        <p class="section-subtitle">Our mission and vision guide everything we do – from sourcing Products to serving our community.</p>
+        <div class="mission-grid">
+            <div class="mission-card">
+                <div class="mission-icon"><i class="fas fa-bullseye"></i></div>
+                <h3 style="font-size:1.75rem; margin-bottom:0.75rem;">Our Mission</h3>
+                <p style="opacity:0.8; font-size:1.05rem;">To provide every student with the tools they need to succeed – affordable, sustainable, and thoughtfully curated supplies that inspire learning.</p>
+            </div>
+            <div class="mission-card">
+                <div class="mission-icon"><i class="fas fa-eye"></i></div>
+                <h3 style="font-size:1.75rem; margin-bottom:0.75rem;">Our Vision</h3>
+                <p style="opacity:0.8; font-size:1.05rem;">A world where no student is held back by a lack of resources. We envision classrooms and homes filled with creativity, knowledge, and opportunity.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 3: CORE VALUES ===== -->
+<section class="values-section">
+    <div class="container">
+        <h2 class="section-title">Our <span style="color:var(--royal);">values</span></h2>
+        <p class="section-subtitle">The principles that shape our culture, our Products, and our relationships.</p>
+        <div class="values-grid">
+            <div class="value-item">
+                <div class="value-icon"><i class="fas fa-heart"></i></div>
+                <h4 style="font-weight:700;">Quality First</h4>
+                <p style="font-size:0.9rem; opacity:0.7;">We never compromise on the materials and resources we offer.</p>
+            </div>
+            <div class="value-item">
+                <div class="value-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                <h4 style="font-weight:700;">Accessibility</h4>
+                <p style="font-size:0.9rem; opacity:0.7;">Great education should be within reach for every family.</p>
+            </div>
+            <div class="value-item">
+                <div class="value-icon"><i class="fas fa-leaf"></i></div>
+                <h4 style="font-weight:700;">Sustainability</h4>
+                <p style="font-size:0.9rem; opacity:0.7;">Eco-friendly packaging and responsibly sourced paper.</p>
+            </div>
+            <div class="value-item">
+                <div class="value-icon"><i class="fas fa-users"></i></div>
+                <h4 style="font-weight:700;">Community</h4>
+                <p style="font-size:0.9rem; opacity:0.7;">We partner with local schools, teachers, and parents.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 4: OUR STORY ===== -->
+<section class="story-section">
+    <div class="container">
+        <h2 class="section-title">Our <span style="color:var(--royal);">journey</span></h2>
+        <p class="section-subtitle">From a small classroom project to a trusted supplier – here's how we grew.</p>
+        <div class="story-grid">
+            <div class="story-card">
+                <div class="story-year">2018</div>
+                <h4 style="font-weight:700; margin-bottom:0.5rem;">The Beginning</h4>
+                <p style="opacity:0.75;">Founded by two teachers who saw the gap in affordable, quality supplies for underfunded schools.</p>
+            </div>
+            <div class="story-card">
+                <div class="story-year">2020</div>
+                <h4 style="font-weight:700; margin-bottom:0.5rem;">First Warehouse</h4>
+                <p style="opacity:0.75;">Opened our first distribution center and expanded our Product line to include textbooks and art materials.</p>
+            </div>
+            <div class="story-card">
+                <div class="story-year">2023</div>
+                <h4 style="font-weight:700; margin-bottom:0.5rem;">National Reach</h4>
+                <p style="opacity:0.75;">Now serving over 2,000 schools and thousands of families across the country with fast delivery.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 5: TEAM ===== -->
+<section id="team" class="team-about-section">
+    <div class="container">
+        <h2 class="section-title">Meet the <span style="color:var(--royal);">team</span></h2>
+        <p class="section-subtitle">Passionate educators, creatives, and supply experts who care about your learning journey.</p>
+        <div class="team-about-grid">
+            <div class="team-about-card">
+                <div class="team-about-img" style="background-image:url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
+                <h4 style="font-weight:700;">Dr. Sarah Kim</h4>
+                <p style="color:var(--royal); font-size:0.85rem;">Curriculum Lead</p>
+            </div>
+            <div class="team-about-card">
+                <div class="team-about-img" style="background-image:url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                <h4 style="font-weight:700;">James Okafor</h4>
+                <p style="color:var(--royal); font-size:0.85rem;">Math Specialist</p>
+            </div>
+            <div class="team-about-card">
+                <div class="team-about-img" style="background-image:url('https://randomuser.me/api/portraits/women/68.jpg');"></div>
+                <h4 style="font-weight:700;">Elena Velez</h4>
+                <p style="color:var(--royal); font-size:0.85rem;">Art & Design</p>
+            </div>
+            <div class="team-about-card">
+                <div class="team-about-img" style="background-image:url('https://randomuser.me/api/portraits/men/75.jpg');"></div>
+                <h4 style="font-weight:700;">David Chen</h4>
+                <p style="color:var(--royal); font-size:0.85rem;">STEM Coordinator</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 6: CTA ===== -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to equip your classroom?</h2>
+        <p>Explore our full range of stationery, textbooks, and learning tools. We're here to help you succeed.</p>
+        <a href="index.html#starter" class="cta-btn"><i class="fas fa-shopping-bag"></i> Shop now</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">
+                    <div class="footer-logo-icon"><i class="fas fa-book-open"></i></div>
+                    <div>
+                        <div class="footer-logo-text" style="white-space:nowrap;">Edu<span>Supplies</span></div>
+                        <span class="footer-tagline">learn & grow</span>
+                    </div>
+                </div>
+                <p style="color:#9ca3af;">Quality stationery, textbooks, and learning tools for every age. Trusted by schools and parents.</p>
+            </div>
+            <div><h3 class="footer-heading">Quick links</h3><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="product.html">Product</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+            <div>
+                <h3 class="footer-heading">Support</h3>
+                <ul class="footer-links">
+                    <li><a href="faq.html">Help Center</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Order Tracking</a></li>
+                    <li><a href="#">Return Policy</a></li>
+                </ul>
+            </div>
+            <div><h3 class="footer-heading">Stay connected</h3><form><input type="email" placeholder="Email address" class="footer-input" /><button class="footer-btn">Subscribe</button></form></div>
+        </div>
+        <div class="copyright">© 2026 EduSupplies – school stationery & textbooks.</div>
+    </div>
+</footer>
+
+<button id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+    // theme / rtl / dropdown logic (identical)
+    const htmlEl = document.documentElement;
+    const desktopTheme = document.getElementById('desktop-theme-toggle');
+    const mobileTheme = document.getElementById('mobile-theme-toggle');
+    const desktopIcon = document.getElementById('desktop-theme-icon');
+    const mobileIcon = document.getElementById('mobile-theme-icon');
+    const desktopRtl = document.getElementById('desktop-rtl-toggle');
+    const mobileRtl = document.getElementById('mobile-rtl-toggle');
+
+    let theme = localStorage.getItem('theme') || 'light';
+    htmlEl.setAttribute('data-theme', theme);
+    if (theme === 'dark') { htmlEl.classList.add('dark'); if(desktopIcon) desktopIcon.className = 'fas fa-sun'; if(mobileIcon) mobileIcon.className = 'fas fa-sun'; }
+
+    function toggleTheme() {
+        let isDark = htmlEl.getAttribute('data-theme') === 'dark';
+        let newTheme = isDark ? 'light' : 'dark';
+        htmlEl.setAttribute('data-theme', newTheme); localStorage.setItem('theme', newTheme);
+        if (newTheme === 'dark') htmlEl.classList.add('dark'); else htmlEl.classList.remove('dark');
+        if (desktopIcon) desktopIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-circle-half-stroke';
+        if (mobileIcon) mobileIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-circle-half-stroke';
+    }
+    if(desktopTheme) desktopTheme.addEventListener('click', toggleTheme);
+    if(mobileTheme) mobileTheme.addEventListener('click', toggleTheme);
+
+    function toggleRtl() { let dir = htmlEl.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl'; htmlEl.setAttribute('dir', dir); localStorage.setItem('direction', dir); }
+    if(desktopRtl) desktopRtl.addEventListener('click', toggleRtl);
+    if(mobileRtl) mobileRtl.addEventListener('click', toggleRtl);
+
+    function toggleDesktopDropdown(id) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+        document.getElementById(id).classList.toggle('active');
+    }
+    window.toggleDesktopDropdown = toggleDesktopDropdown;
+
+    function toggleMobileDropdown(id) {
+        document.getElementById(id).classList.toggle('active');
+    }
+    window.toggleMobileDropdown = toggleMobileDropdown;
+
+    // mobile menu
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('close-mobile-menu');
+
+    if(menuBtn) {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.add('active');
+        });
+    }
+    if(closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.remove('active');
+        });
+    }
+    mobileMenu.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) {
+            mobileMenu.classList.remove('active');
+        }
+    });
+
+    // scroll top
+    const scrollBtn = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) scrollBtn.style.display = 'block';
+        else scrollBtn.style.display = 'none';
+    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1280) mobileMenu.classList.remove('active');
+    });
+</script>
+</body>
+</html>

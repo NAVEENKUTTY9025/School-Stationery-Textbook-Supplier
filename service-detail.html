@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Service Detail – learn more about our school supply solutions." />
+    <title>Service Detail | EduSupplies</title>
+    <link rel="icon" type="image/jpeg" href="/images/edu-favicon.jpg" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet" />
+    <style>
+        /* ----- RESET & VARIABLES (Royal Blue / Black / White) ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --text-main: #111111;
+            --text-heading: #111111;
+            --card-bg: #FFFFFF;
+            --border-light: #E2E8F0;
+            --accent-blue: #2563EB;
+            --accent-dark: #111111;
+            --navbar-bg: #111111;
+
+            --royal: #2563EB;
+            --deep: #111111;
+            --white: #FFFFFF;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #111111;
+            --bg-secondary: #1E1E1E;
+            --text-main: #EAEAEA;
+            --text-heading: #FAFAFA;
+            --card-bg: #222222;
+            --border-light: #3A3A3A;
+            --accent-blue: #3B82F6;
+            --accent-dark: #000000;
+            --navbar-bg: #000000;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.5;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-heading);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        a { text-decoration: none; }
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* ----- NAVBAR (identical structure) ----- */
+        .navbar-container {
+            background-color: var(--navbar-bg);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border-bottom: 1px solid #2f2f2f;
+            padding: 0.75rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: transform 0.2s;
+        }
+        .logo:hover { transform: scale(1.05); }
+        .logo-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--royal);
+            overflow: hidden;
+        }
+        .logo-icon i {
+            color: var(--royal);
+            font-size: 2rem;
+        }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+        .logo-text span { color: var(--royal); }
+        .logo-tagline {
+            font-size: 0.625rem;
+            color: #ccc;
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        /* desktop nav */
+        .desktop-nav {
+            display: none;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .nav-link {
+            color: #e0e0e0;
+            padding: 0.5rem 0.875rem;
+            transition: 0.2s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .nav-link:hover {
+            color: #FAFAFA;
+            background-color: #2a2a2a;
+            border-radius: 30px;
+        }
+        .nav-link.active {
+            color: #FAFAFA;
+            font-weight: 600;
+            background: var(--royal);
+            border-radius: 30px;
+        }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #1c1c1c;
+            border: 1px solid #333;
+            border-radius: 16px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: 0.3s;
+            z-index: 1000;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: #ccc;
+            transition: 0.2s;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .dropdown-item:hover {
+            background-color: var(--royal);
+            color: #fff;
+            padding-left: 28px;
+            border-radius: 12px;
+        }
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            transition: 0.2s;
+        }
+        .dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+
+        .navbar-right-desktop {
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .icon-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        .icon-btn:hover {
+            background-color: var(--royal);
+            color: var(--deep);
+        }
+        .login-btn {
+            background-color: var(--royal);
+            color: white;
+            padding: 0.625rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+        }
+        .login-btn:hover {
+            background-color: white;
+            color: var(--deep);
+        }
+
+        .mobile-menu-btn {
+            display: flex;
+            color: white;
+            font-size: 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--deep);
+            z-index: 9999;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-menu.active { transform: translateX(0); }
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .mobile-menu-close {
+            color: white;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .mobile-menu-items {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 500;
+            border-bottom: 1px solid #2a2a2a;
+            transition: 0.2s;
+        }
+        .mobile-menu-item i {
+            color: var(--royal);
+            margin-right: 1rem;
+            width: 1.75rem;
+            font-size: 1.25rem;
+        }
+        .mobile-menu-item:hover {
+            background-color: #1f1f1f;
+            padding-left: 0.5rem;
+        }
+        .mobile-menu-item.active {
+            color: var(--royal);
+            font-weight: 700;
+            background-color: #1f1f1f;
+            padding-left: 0.5rem;
+        }
+        /* mobile dropdown */
+        .mobile-dropdown { border-bottom: 1px solid #2a2a2a; }
+        .mobile-dropdown-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 500;
+            padding: 1rem 0;
+            cursor: pointer;
+        }
+        .mobile-dropdown-btn i:first-child {
+            color: var(--royal);
+            margin-right: 1rem;
+            width: 1.75rem;
+            font-size: 1.25rem;
+        }
+        .mobile-dropdown-btn .fa-chevron-down {
+            color: var(--royal);
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #1a1a1a;
+            border-radius: 16px;
+            margin-bottom: 0.5rem;
+        }
+        .mobile-dropdown-content.active {
+            max-height: 200px;
+            padding: 0.75rem 0;
+        }
+        .mobile-dropdown-content a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem 0.75rem 3rem;
+            color: #ccc;
+            transition: 0.2s;
+            font-size: 1.1rem;
+        }
+        .mobile-dropdown-content a:hover {
+            background-color: var(--royal);
+            color: white;
+        }
+        .mobile-action-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 500;
+            border-bottom: 1px solid #2a2a2a;
+            transition: 0.2s;
+            background: transparent;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+        .mobile-action-item i {
+            color: var(--royal);
+            margin-right: 1rem;
+            width: 1.75rem;
+            font-size: 1.25rem;
+        }
+        .mobile-action-item:hover {
+            background-color: #1f1f1f;
+            padding-left: 0.5rem;
+        }
+        .mobile-separator {
+            margin: 1rem 0 0.5rem 0;
+            border-top: 2px solid #2f2f2f;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .btn-primary, .btn-outline {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: var(--royal);
+            color: white;
+            border: 2px solid var(--royal);
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--royal);
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--border-light);
+        }
+        .btn-outline:hover {
+            border-color: var(--royal);
+            color: var(--royal);
+        }
+
+        /* ----- SERVICE DETAIL PAGE SPECIFIC SECTIONS ----- */
+        .detail-hero {
+            background-color: white;
+            min-height: 45vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+            padding-top: 100px;
+            padding-bottom: 3rem;
+        }
+        .detail-hero .container { padding-top: 0; padding-bottom: 0; }
+        .detail-hero-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.04;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22 width=%2240%22 height=%2240%22><path fill=%22%232563EB%22 d=%22M0 0 L40 40 M40 0 L0 40%22 stroke-width=%221%22 stroke=%22%23111111%22 opacity=%220.3%22 /></svg>');
+        }
+        .detail-hero-grid {
+            display: grid;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media (min-width: 1024px) {
+            .detail-hero-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .detail-hero-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #111111;
+        }
+        @media (min-width: 640px) { .detail-hero-title { font-size: 3.5rem; } }
+        @media (min-width: 768px) { .detail-hero-title { font-size: 4rem; } }
+        .detail-hero-title span { color: var(--royal); }
+        .detail-hero-text {
+            font-size: 1.125rem;
+            color: #333;
+            margin-bottom: 2rem;
+            max-width: 540px;
+        }
+        .detail-badge {
+            display: inline-block;
+            background: var(--royal);
+            color: white;
+            padding: 0.4rem 1.2rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        /* Detail Content */
+        .detail-content-section {
+            padding: 5rem 0;
+            background-color: var(--bg-secondary);
+        }
+        .detail-content-grid {
+            display: grid;
+            gap: 3rem;
+        }
+        @media (min-width: 1024px) {
+            .detail-content-grid { grid-template-columns: 2fr 1fr; }
+        }
+        .detail-main h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .detail-main h2 span { color: var(--royal); }
+        .detail-main p {
+            opacity: 0.85;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+        .detail-main ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        .detail-main ul li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .detail-main ul li i {
+            color: var(--royal);
+            width: 1.5rem;
+        }
+        .detail-sidebar {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-light);
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+        .detail-sidebar h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        .detail-sidebar .price-box {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .detail-sidebar .price-box .price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--royal);
+        }
+        .detail-sidebar .price-box .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.6;
+        }
+        .detail-sidebar .btn-primary {
+            width: 100%;
+            justify-content: center;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+        .detail-sidebar .btn-outline {
+            width: 100%;
+            justify-content: center;
+            padding: 1rem;
+            font-size: 1.1rem;
+            margin-top: 0.75rem;
+        }
+        .detail-sidebar .feature-list {
+            margin-top: 1.5rem;
+        }
+        .detail-sidebar .feature-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .detail-sidebar .feature-list li i {
+            color: var(--royal);
+        }
+
+        /* Related Services */
+        .related-section {
+            padding: 5rem 0;
+            background-color: var(--bg-primary);
+        }
+        .related-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: 1fr;
+        }
+        @media (min-width: 768px) {
+            .related-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        .related-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-light);
+            transition: 0.3s;
+            text-align: center;
+        }
+        .related-card:hover {
+            border-color: var(--royal);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+        .related-card .icon {
+            font-size: 2.5rem;
+            color: var(--royal);
+            margin-bottom: 0.75rem;
+        }
+        .related-card h4 {
+            margin-bottom: 0.5rem;
+        }
+        .related-card p {
+            font-size: 0.9rem;
+            opacity: 0.75;
+        }
+
+        /* footer */
+        .footer {
+            background-color: var(--deep);
+            color: white;
+            padding: 4rem 0;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .footer-logo-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--royal);
+        }
+        .footer-logo-icon i { color: var(--royal); font-size: 2rem; }
+        .footer-logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+        .footer-logo-text span { color: var(--royal); }
+        .footer-tagline {
+            font-size: 0.625rem;
+            color: #ccc;
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        .footer-heading {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--royal);
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-links a {
+            color: #9ca3af;
+            transition: 0.2s;
+        }
+        .footer-links a:hover { color: var(--royal); }
+        .footer-input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 9999px;
+            margin-bottom: 0.5rem;
+            border: none;
+        }
+        .footer-btn {
+            width: 100%;
+            background-color: var(--royal);
+            color: white;
+            padding: 0.75rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .footer-btn:hover {
+            background-color: white;
+            color: var(--deep);
+        }
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+        #scroll-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--royal);
+            color: white;
+            border-radius: 50%;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            z-index: 100;
+            display: none;
+        }
+        #scroll-top:hover {
+            background-color: white;
+            color: var(--deep);
+        }
+        @media (min-width: 1280px) {
+            .desktop-nav { display: flex; }
+            .navbar-right-desktop { display: flex; }
+            .mobile-menu-btn { display: none; }
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.7s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        [style*="background-image"] {
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            opacity: 0.8;
+            max-width: 40rem;
+            margin: 0 auto 3rem;
+        }
+        @media (min-width: 768px) {
+            .section-title { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar-container">
+    <div class="container navbar-flex">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-book-open"></i></div>
+            <div>
+                <div class="logo-text">Edu<span>Supplies</span></div>
+                <span class="logo-tagline">learn & grow</span>
+            </div>
+        </a>
+        <div class="desktop-nav">
+            <div class="dropdown" id="Home-dropdown">
+                <div class="nav-link" onclick="toggleDesktopDropdown('Home-dropdown')">Home <i class="fas fa-chevron-down dropdown-arrow"></i></div>
+                <div class="dropdown-menu">
+                    <a href="index.html" class="dropdown-item"> Home I</a>
+                    <a href="home2.html" class="dropdown-item"> Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="services.html" class="nav-link active">Services</a>
+            <a href="product.html" class="nav-link">Products</a>
+            <a href="pricing.html" class="nav-link">Pricing</a>
+            <a href="faq.html" class="nav-link">FAQ</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        <div class="navbar-right-desktop">
+            <button class="icon-btn" id="desktop-theme-toggle"><i class="fas fa-circle-half-stroke" id="desktop-theme-icon"></i></button>
+            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-right-left"></i></button>
+            <a href="login.html" class="login-btn"> Login</a>
+            <a href="register.html" class="login-btn">Register</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-header">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-book-open"></i></div>
+            <div>
+                <div class="logo-text">Edu<span>Supplies</span></div>
+                <span class="logo-tagline">learn & grow</span>
+            </div>
+        </a>
+        <button class="mobile-menu-close" id="close-mobile-menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-menu-items">
+        <div class="mobile-dropdown">
+            <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('Home-mobile')">
+                <span>Home</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="Home-mobile" class="mobile-dropdown-content">
+                <a href="index.html"> Home I</a>
+                <a href="home2.html"> Home 2</a>
+            </div>
+        </div>
+        <a href="about.html" class="mobile-menu-item">About</a>
+        <a href="services.html" class="mobile-menu-item active">Services</a>
+        <a href="product.html" class="mobile-menu-item">Product</a>
+        <a href="pricing.html" class="mobile-menu-item">Pricing</a>
+        <a href="faq.html" class="mobile-menu-item">FAQ</a>
+        <a href="contact.html" class="mobile-menu-item">Contact</a>
+        <div class="mobile-separator"></div>
+        <button class="mobile-action-item" onclick="window.location.href='login.html'"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <button class="mobile-action-item" onclick="window.location.href='register.html'"><i class="fas fa-user-plus"></i> Register</button>
+        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-right-left"></i> RTL</button>
+        <button class="mobile-action-item" id="mobile-theme-toggle"><i class="fas fa-circle-half-stroke" id="mobile-theme-icon"></i> Theme</button>
+    </div>
+</div>
+
+<!-- ===== SECTION 1: DETAIL HERO (Dynamic) ===== -->
+<section class="detail-hero">
+    <div class="detail-hero-pattern"></div>
+    <div class="container relative z-10">
+        <div class="detail-hero-grid">
+            <div class="fade-in-up">
+                <span class="detail-badge" id="serviceBadge">Service Detail</span>
+                <h1 class="detail-hero-title" id="serviceTitle">Bulk Supply <span>Delivery</span></h1>
+                <p class="detail-hero-text" id="serviceHeroText">Get all your school supplies delivered in bulk directly to your institution. We handle everything from stationery to textbooks with scheduled delivery options.</p>
+                <div class="btn-group">
+                    <a href="#detail-content" class="btn-primary"><i class="fas fa-arrow-down"></i> Learn more</a>
+                    <a href="contact.html" class="btn-outline"><i class="fas fa-phone"></i> Contact us</a>
+                </div>
+            </div>
+            <div class="hero-image order-1 lg:order-2" style="min-height:340px;" id="serviceHeroImage">
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop" alt="Service detail" style="width:100%; height:100%; object-fit:cover;" id="heroImg" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 2: DETAIL CONTENT ===== -->
+<section id="detail-content" class="detail-content-section">
+    <div class="container">
+        <div class="detail-content-grid">
+            <div class="detail-main" id="detailMain">
+                <h2>What is <span id="serviceName">Bulk Supply Delivery</span>?</h2>
+                <p id="detailDesc1">Our Bulk Supply Delivery service is designed to make school procurement effortless. We partner with schools, districts, and educational institutions to provide a seamless supply chain for all classroom and administrative needs.</p>
+                <p id="detailDesc2">From stationery and notebooks to textbooks and art supplies, we handle the entire process – sourcing, warehousing, and scheduled delivery. Our team works with you to understand your specific requirements and create a customized delivery schedule that fits your academic calendar.</p>
+                
+                <h3 style="margin-top:2rem; margin-bottom:0.5rem;">Key Benefits</h3>
+                <ul id="benefitsList">
+                    <li><i class="fas fa-check-circle"></i> Scheduled deliveries to match your school's calendar</li>
+                    <li><i class="fas fa-check-circle"></i> Custom orders tailored to your curriculum</li>
+                    <li><i class="fas fa-check-circle"></i> Free shipping on all bulk orders over $500</li>
+                    <li><i class="fas fa-check-circle"></i> Dedicated account manager for your institution</li>
+                    <li><i class="fas fa-check-circle"></i> Real-time order tracking and inventory management</li>
+                </ul>
+
+                <h3 style="margin-top:2rem; margin-bottom:0.5rem;">How It Works</h3>
+                <ul id="howItWorks">
+                    <li><i class="fas fa-arrow-right"></i> Submit your school's supply list</li>
+                    <li><i class="fas fa-arrow-right"></i> We source and prepare your order</li>
+                    <li><i class="fas fa-arrow-right"></i> Schedule delivery at your convenience</li>
+                    <li><i class="fas fa-arrow-right"></i> Receive and distribute to classrooms</li>
+                </ul>
+            </div>
+
+            <div class="detail-sidebar" id="detailSidebar">
+                <h3>Service Details</h3>
+                <div class="price-box">
+                    <div class="price" id="servicePrice">$0<span>/mo</span></div>
+                    <p style="font-size:0.9rem; opacity:0.7;" id="priceNote">Custom pricing based on volume</p>
+                </div>
+                
+                <a href="contact.html" class="btn-primary"><i class="fas fa-paper-plane"></i> Get a quote</a>
+                <a href="services.html" class="btn-outline"><i class="fas fa-arrow-left"></i> Back to services</a>
+
+                <div class="feature-list">
+                    <h4 style="margin:1.5rem 0 0.5rem;">What's Included</h4>
+                    <ul id="includedList">
+                        <li><i class="fas fa-check"></i> Full supply procurement</li>
+                        <li><i class="fas fa-check"></i> Scheduled delivery</li>
+                        <li><i class="fas fa-check"></i> Dedicated support</li>
+                        <li><i class="fas fa-check"></i> Volume discounts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 3: RELATED SERVICES ===== -->
+<section class="related-section">
+    <div class="container">
+        <h2 class="section-title">Other <span style="color:var(--royal);">services</span></h2>
+        <p class="section-subtitle">Explore our other school supply solutions.</p>
+        <div class="related-grid">
+            <a href="service-detail.html?service=textbook-rental" class="related-card">
+                <div class="icon"><i class="fas fa-book"></i></div>
+                <h4>Textbook Rental</h4>
+                <p>Affordable textbook rentals for students and schools.</p>
+            </a>
+            <a href="service-detail.html?service=stationery-subscription" class="related-card">
+                <div class="icon"><i class="fas fa-box"></i></div>
+                <h4>Stationery Subscription</h4>
+                <p>Monthly stationery boxes delivered to your door.</p>
+            </a>
+            <a href="service-detail.html?service=school-kits" class="related-card">
+                <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                <h4>School Supply Kits</h4>
+                <p>Grade-specific kits with everything students need.</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">
+                    <div class="footer-logo-icon"><i class="fas fa-book-open"></i></div>
+                    <div>
+                        <div class="footer-logo-text" style="white-space:nowrap;">Edu<span>Supplies</span></div>
+                        <span class="footer-tagline">learn & grow</span>
+                    </div>
+                </div>
+                <p style="color:#9ca3af;">Quality stationery, textbooks, and learning tools for every age. Trusted by schools and parents.</p>
+            </div>
+            <div><h3 class="footer-heading">Quick links</h3><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="product.html">Products</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+            <div>
+                <h3 class="footer-heading">Support</h3>
+                <ul class="footer-links">
+                    <li><a href="faq.html">Help Center</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Order Tracking</a></li>
+                    <li><a href="#">Return Policy</a></li>
+                </ul>
+            </div>
+            <div><h3 class="footer-heading">Stay connected</h3><form><input type="email" placeholder="Email address" class="footer-input" /><button class="footer-btn">Subscribe</button></form></div>
+        </div>
+        <div class="copyright">© 2026 EduSupplies – school stationery & textbooks.</div>
+    </div>
+</footer>
+
+<button id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+    // theme / rtl / dropdown logic
+    const htmlEl = document.documentElement;
+    const desktopTheme = document.getElementById('desktop-theme-toggle');
+    const mobileTheme = document.getElementById('mobile-theme-toggle');
+    const desktopIcon = document.getElementById('desktop-theme-icon');
+    const mobileIcon = document.getElementById('mobile-theme-icon');
+    const desktopRtl = document.getElementById('desktop-rtl-toggle');
+    const mobileRtl = document.getElementById('mobile-rtl-toggle');
+
+    let theme = localStorage.getItem('theme') || 'light';
+    htmlEl.setAttribute('data-theme', theme);
+    if (theme === 'dark') { htmlEl.classList.add('dark'); if(desktopIcon) desktopIcon.className = 'fas fa-sun'; if(mobileIcon) mobileIcon.className = 'fas fa-sun'; }
+
+    function toggleTheme() {
+        let isDark = htmlEl.getAttribute('data-theme') === 'dark';
+        let newTheme = isDark ? 'light' : 'dark';
+        htmlEl.setAttribute('data-theme', newTheme); localStorage.setItem('theme', newTheme);
+        if (newTheme === 'dark') htmlEl.classList.add('dark'); else htmlEl.classList.remove('dark');
+        if (desktopIcon) desktopIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-circle-half-stroke';
+        if (mobileIcon) mobileIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-circle-half-stroke';
+    }
+    if(desktopTheme) desktopTheme.addEventListener('click', toggleTheme);
+    if(mobileTheme) mobileTheme.addEventListener('click', toggleTheme);
+
+    function toggleRtl() { let dir = htmlEl.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl'; htmlEl.setAttribute('dir', dir); localStorage.setItem('direction', dir); }
+    if(desktopRtl) desktopRtl.addEventListener('click', toggleRtl);
+    if(mobileRtl) mobileRtl.addEventListener('click', toggleRtl);
+
+    function toggleDesktopDropdown(id) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+        document.getElementById(id).classList.toggle('active');
+    }
+    window.toggleDesktopDropdown = toggleDesktopDropdown;
+
+    function toggleMobileDropdown(id) {
+        document.getElementById(id).classList.toggle('active');
+    }
+    window.toggleMobileDropdown = toggleMobileDropdown;
+
+    // mobile menu
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('close-mobile-menu');
+
+    if(menuBtn) {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.add('active');
+        });
+    }
+    if(closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.remove('active');
+        });
+    }
+    mobileMenu.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) {
+            mobileMenu.classList.remove('active');
+        }
+    });
+
+    // scroll top
+    const scrollBtn = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) scrollBtn.style.display = 'block';
+        else scrollBtn.style.display = 'none';
+    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1280) mobileMenu.classList.remove('active');
+    });
+
+    // ===== DYNAMIC CONTENT LOADER =====
+    // This function loads content based on URL parameter 'service'
+    function loadServiceDetail() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const service = urlParams.get('service') || 'bulk-delivery';
+
+        const serviceData = {
+            'bulk-delivery': {
+                badge: 'Service 01',
+                title: 'Bulk Supply <span>Delivery</span>',
+                heroText: 'Get all your school supplies delivered in bulk directly to your institution. We handle everything from stationery to textbooks with scheduled delivery options.',
+                heroImg: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop',
+                name: 'Bulk Supply Delivery',
+                desc1: 'Our Bulk Supply Delivery service is designed to make school procurement effortless. We partner with schools, districts, and educational institutions to provide a seamless supply chain for all classroom and administrative needs.',
+                desc2: 'From stationery and notebooks to textbooks and art supplies, we handle the entire process – sourcing, warehousing, and scheduled delivery. Our team works with you to understand your specific requirements and create a customized delivery schedule that fits your academic calendar.',
+                benefits: [
+                    'Scheduled deliveries to match your school\'s calendar',
+                    'Custom orders tailored to your curriculum',
+                    'Free shipping on all bulk orders over $500',
+                    'Dedicated account manager for your institution',
+                    'Real-time order tracking and inventory management'
+                ],
+                howItWorks: [
+                    'Submit your school\'s supply list',
+                    'We source and prepare your order',
+                    'Schedule delivery at your convenience',
+                    'Receive and distribute to classrooms'
+                ],
+                price: '$0',
+                priceNote: 'Custom pricing based on volume',
+                included: [
+                    'Full supply procurement',
+                    'Scheduled delivery',
+                    'Dedicated support',
+                    'Volume discounts'
+                ]
+            },
+            'textbook-rental': {
+                badge: 'Service 02',
+                title: 'Textbook <span>Rental</span>',
+                heroText: 'Save money with our affordable textbook rental program. Rent textbooks for the entire semester and return them when you\'re done. Perfect for students and schools.',
+                heroImg: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2070&auto=format&fit=crop',
+                name: 'Textbook Rental',
+                desc1: 'Our Textbook Rental program helps students and schools save money while ensuring access to the latest educational materials. Rent textbooks for the semester at a fraction of the purchase price.',
+                desc2: 'With a wide selection of subjects and grade levels, we make it easy to get the books you need. Return them at the end of the semester with free shipping. Late fees are minimal and we offer flexible rental periods.',
+                benefits: [
+                    'Rent textbooks for the entire semester',
+                    'Wide selection of subjects and grade levels',
+                    'Free return shipping',
+                    'Flexible rental periods available',
+                    'Option to purchase rented books'
+                ],
+                howItWorks: [
+                    'Browse our textbook catalog',
+                    'Select your rental period',
+                    'Receive books at your doorstep',
+                    'Return with free shipping label'
+                ],
+                price: '$14.99',
+                priceNote: 'Starting price per book',
+                included: [
+                    'Semester rental period',
+                    'Free return shipping',
+                    'Optional purchase option',
+                    'Late return grace period'
+                ]
+            },
+            'stationery-subscription': {
+                badge: 'Service 03',
+                title: 'Stationery <span>Subscription</span>',
+                heroText: 'Never run out of supplies with our monthly stationery subscription boxes. Customize your box with pens, notebooks, art supplies, and more – delivered every month.',
+                heroImg: 'https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=2070&auto=format&fit=crop',
+                name: 'Stationery Subscription',
+                desc1: 'Our Stationery Subscription service delivers curated boxes of premium stationery right to your door every month. Perfect for students, teachers, and professionals who want to stay stocked.',
+                desc2: 'Customize your box by selecting from dozens of items – notebooks, pens, highlighters, art supplies, and more. Save 20% compared to retail prices and enjoy free shipping on every box.',
+                benefits: [
+                    'Monthly delivery of premium stationery',
+                    'Customize your box each month',
+                    'Save 20% off retail prices',
+                    'Free shipping on every box',
+                    'Skip or cancel anytime'
+                ],
+                howItWorks: [
+                    'Choose your subscription plan',
+                    'Customize your monthly box',
+                    'Receive your box every month',
+                    'Update preferences anytime'
+                ],
+                price: '$24.99',
+                priceNote: 'Monthly subscription',
+                included: [
+                    '5–7 stationery items per box',
+                    'Free shipping',
+                    '20% retail discount',
+                    'Flexible subscription management'
+                ]
+            },
+            'school-kits': {
+                badge: 'Service 04',
+                title: 'School Supply <span>Kits</span>',
+                heroText: 'Pre-packaged grade-specific supply kits for primary, middle, and secondary levels. Includes everything a student needs for a successful school year.',
+                heroImg: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2022&auto=format&fit=crop',
+                name: 'School Supply Kits',
+                desc1: 'Our School Supply Kits are pre-packaged bundles designed for specific grade levels. Each kit contains everything a student needs for the school year – carefully curated by educators.',
+                desc2: 'Available for primary, middle, and secondary levels. Kits include notebooks, stationery, art supplies, and more. Schools can order in bulk for distribution to students.',
+                benefits: [
+                    'Grade-specific supply kits',
+                    'Everything students need in one box',
+                    'Bulk ordering for schools',
+                    'Free shipping on school orders',
+                    'Customizable for your school'
+                ],
+                howItWorks: [
+                    'Select your grade level',
+                    'Choose your kit configuration',
+                    'Order for your student or classroom',
+                    'Receive and distribute'
+                ],
+                price: '$49.99',
+                priceNote: 'Per kit',
+                included: [
+                    '10+ stationery items',
+                    'Grade-appropriate supplies',
+                    'Carrying case included',
+                    'Free shipping on bulk'
+                ]
+            },
+            'custom-portals': {
+                badge: 'Service 05',
+                title: 'Custom School <span>Portals</span>',
+                heroText: 'We create dedicated online portals for schools where parents can view and purchase required supplies from your curated booklist. Streamlines the entire process.',
+                heroImg: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop',
+                name: 'Custom School Portals',
+                desc1: 'Our Custom School Portals are white-label solutions that allow schools to manage supply requests from parents. Upload your booklist, set pricing, and parents can order everything they need.',
+                desc2: 'The portal integrates with your school\'s branding and makes the supply purchase process seamless. Parents can view required items, add to cart, and checkout in minutes.',
+                benefits: [
+                    'White-label portal with your branding',
+                    'Upload and manage your booklist',
+                    'Parents order directly from the portal',
+                    'Real-time inventory tracking',
+                    'Automated reminders for parents'
+                ],
+                howItWorks: [
+                    'Contact us to set up your portal',
+                    'Upload your school\'s booklist',
+                    'Share the portal link with parents',
+                    'Manage orders from your dashboard'
+                ],
+                price: '$299',
+                priceNote: 'One-time setup fee',
+                included: [
+                    'Custom branded portal',
+                    'Booklist management',
+                    'Parent ordering system',
+                    'Order tracking dashboard'
+                ]
+            },
+            'teacher-hub': {
+                badge: 'Service 06',
+                title: 'Teacher Resource <span>Hub</span>',
+                heroText: 'Access a curated library of teaching resources, lesson plans, and classroom materials. Plus get exclusive discounts on supplies for your classroom.',
+                heroImg: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2070&auto=format&fit=crop',
+                name: 'Teacher Resource Hub',
+                desc1: 'The Teacher Resource Hub is your one-stop destination for teaching materials. Access lesson plans, worksheets, activities, and professional development resources across all subjects.',
+                desc2: 'Teachers also enjoy exclusive discounts on classroom supplies – from stationery to decorations. Join thousands of educators who are saving time and money with our hub.',
+                benefits: [
+                    'Curated library of teaching resources',
+                    'Lesson plans and worksheets',
+                    'Exclusive teacher discounts',
+                    'Professional development materials',
+                    'Resource sharing with colleagues'
+                ],
+                howItWorks: [
+                    'Create your free teacher account',
+                    'Browse and download resources',
+                    'Apply discounts on supplies',
+                    'Share resources with colleagues'
+                ],
+                price: 'Free',
+                priceNote: 'For verified teachers',
+                included: [
+                    'Access to resource library',
+                    'Teacher discount program',
+                    'Weekly resource updates',
+                    'Community forum access'
+                ]
+            }
+        };
+
+        const data = serviceData[service] || serviceData['bulk-delivery'];
+
+        // Update DOM elements
+        document.getElementById('serviceBadge').textContent = data.badge;
+        document.getElementById('serviceTitle').innerHTML = data.title;
+        document.getElementById('serviceHeroText').textContent = data.heroText;
+        document.getElementById('heroImg').src = data.heroImg;
+        document.getElementById('serviceName').textContent = data.name;
+        document.getElementById('detailDesc1').textContent = data.desc1;
+        document.getElementById('detailDesc2').textContent = data.desc2;
+        document.getElementById('servicePrice').innerHTML = data.price + '<span>/mo</span>';
+        document.getElementById('priceNote').textContent = data.priceNote;
+
+        // Benefits
+        const benefitsList = document.getElementById('benefitsList');
+        benefitsList.innerHTML = '';
+        data.benefits.forEach(item => {
+            const li = document.createElement('li');
+            li.innerHTML = `<i class="fas fa-check-circle"></i> ${item}`;
+            benefitsList.appendChild(li);
+        });
+
+        // How It Works
+        const howItWorks = document.getElementById('howItWorks');
+        howItWorks.innerHTML = '';
+        data.howItWorks.forEach(item => {
+            const li = document.createElement('li');
+            li.innerHTML = `<i class="fas fa-arrow-right"></i> ${item}`;
+            howItWorks.appendChild(li);
+        });
+
+        // Included
+        const includedList = document.getElementById('includedList');
+        includedList.innerHTML = '';
+        data.included.forEach(item => {
+            const li = document.createElement('li');
+            li.innerHTML = `<i class="fas fa-check"></i> ${item}`;
+            includedList.appendChild(li);
+        });
+    }
+
+    // Load content on page load
+    document.addEventListener('DOMContentLoaded', loadServiceDetail);
+</script>
+</body>
+</html>

@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="School Home I & Textbook Supplier – quality supplies for every classroom and home." />
+    <title>EduSupplies | School Home I & Home 2</title>
+    <link rel="icon" type="image/jpeg" href="/images/edu-favicon.jpg" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet" />
+    <style>
+        /* ----- RESET & VARIABLES (Royal Blue / Black / White) ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --text-main: #111111;
+            --text-heading: #111111;
+            --card-bg: #FFFFFF;
+            --border-light: #E2E8F0;
+            --accent-blue: #2563EB;
+            --accent-dark: #111111;
+            --navbar-bg: #111111;
+
+            --royal: #2563EB;
+            --deep: #111111;
+            --white: #FFFFFF;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #111111;
+            --bg-secondary: #1E1E1E;
+            --text-main: #EAEAEA;
+            --text-heading: #FAFAFA;
+            --card-bg: #222222;
+            --border-light: #3A3A3A;
+            --accent-blue: #3B82F6;
+            --accent-dark: #000000;
+            --navbar-bg: #000000;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.5;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-heading);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        a { text-decoration: none; }
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* ----- NAVBAR (identical structure) ----- */
+        .navbar-container {
+            background-color: var(--navbar-bg);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border-bottom: 1px solid #2f2f2f;
+            padding: 0.75rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: transform 0.2s;
+        }
+        .logo:hover { transform: scale(1.05); }
+        .logo-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--royal);
+            overflow: hidden;
+        }
+        .logo-icon i {
+            color: var(--royal);
+            font-size: 2rem;
+        }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+        .logo-text span { color: var(--royal); }
+        .logo-tagline {
+            font-size: 0.625rem;
+            color: #ccc;
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        /* desktop nav */
+        .desktop-nav {
+            display: none;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .nav-link {
+            color: #e0e0e0;
+            padding: 0.5rem 0.875rem;
+            transition: 0.2s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .nav-link:hover {
+            color: #FAFAFA;
+            background-color: #2a2a2a;
+            border-radius: 30px;
+        }
+        .nav-link.active {
+            color: #FAFAFA;
+            font-weight: 600;
+            background: var(--royal);
+            border-radius: 30px;
+        }
+        /* dropdown – we keep structure but use for "Home" */
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #1c1c1c;
+            border: 1px solid #333;
+            border-radius: 16px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: 0.3s;
+            z-index: 1000;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: #ccc;
+            transition: 0.2s;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .dropdown-item:hover, .dropdown-item.active {
+            background-color: var(--royal);
+            color: #fff;
+            padding-left: 28px;
+            border-radius: 12px;
+        }
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            transition: 0.2s;
+        }
+        .dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+
+        /* desktop right icons */
+        .navbar-right-desktop {
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .icon-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        .icon-btn:hover {
+            background-color: var(--royal);
+            color: var(--deep);
+        }
+        .login-btn {
+            background-color: var(--royal);
+            color: white;
+            padding: 0.625rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+        }
+        .login-btn:hover {
+            background-color: white;
+            color: var(--deep);
+        }
+
+        /* mobile menu button */
+        .mobile-menu-btn {
+            display: flex;
+            color: white;
+            font-size: 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* mobile menu overlay */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--deep);
+            z-index: 9999;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-menu.active { transform: translateX(0); }
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .mobile-menu-close {
+            color: white;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .mobile-menu-items {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 500;
+            border-bottom: 1px solid #2a2a2a;
+            transition: 0.2s;
+        }
+        .mobile-menu-item i {
+            color: var(--royal);
+            margin-right: 1rem;
+            width: 1.75rem;
+            font-size: 1.25rem;
+        }
+        .mobile-menu-item:hover {
+            background-color: #1f1f1f;
+            padding-left: 0.5rem;
+        }
+        .mobile-menu-item.active {
+            color: var(--royal);
+            font-weight: 700;
+            background-color: #1f1f1f;
+            padding-left: 0.5rem;
+        }
+        /* mobile dropdown */
+        .mobile-dropdown { border-bottom: 1px solid #2a2a2a; }
+        .mobile-dropdown-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 500;
+            padding: 1rem 0;
+            cursor: pointer;
+        }
+        .mobile-dropdown-btn i:first-child {
+            color: var(--royal);
+            margin-right: 1rem;
+            width: 1.75rem;
+            font-size: 1.25rem;
+        }
+        .mobile-dropdown-btn .fa-chevron-down {
+            color: var(--royal);
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #1a1a1a;
+            border-radius: 16px;
+            margin-bottom: 0.5rem;
+        }
+        .mobile-dropdown-content.active {
+            max-height: 200px;
+            padding: 0.75rem 0;
+        }
+        .mobile-dropdown-content a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem 0.75rem 3rem;
+            color: #ccc;
+            transition: 0.2s;
+            font-size: 1.1rem;
+        }
+        .mobile-dropdown-content a:hover, .mobile-dropdown-content a.active {
+            background-color: var(--royal);
+            color: white;
+            padding-left: 3.5rem;
+        }
+        .mobile-action-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 500;
+            border-bottom: 1px solid #2a2a2a;
+            transition: 0.2s;
+            background: transparent;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+        .mobile-action-item i {
+            color: var(--royal);
+            margin-right: 1rem;
+            width: 1.75rem;
+            font-size: 1.25rem;
+        }
+        .mobile-action-item:hover {
+            background-color: #1f1f1f;
+            padding-left: 0.5rem;
+        }
+        .mobile-separator {
+            margin: 1rem 0 0.5rem 0;
+            border-top: 2px solid #2f2f2f;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .btn-primary, .btn-outline {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: var(--royal);
+            color: white;
+            border: 2px solid var(--royal);
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--royal);
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--border-light);
+        }
+        .btn-outline:hover {
+            border-color: var(--royal);
+            color: var(--royal);
+        }
+
+        /* ----- HOME PAGE SPECIFIC SECTIONS ----- */
+        .hero {
+            background-color: white;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+            padding-top: 80px;
+            padding-bottom: 0;
+        }
+        .hero .container { padding-top: 0; padding-bottom: 0; }
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22 width=%2240%22 height=%2240%22><path fill=%22%232563EB%22 d=%22M0 0 L40 40 M40 0 L0 40%22 stroke-width=%221%22 stroke=%22%23111111%22 opacity=%220.3%22 /></svg>');
+        }
+        .hero-grid {
+            display: grid;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media (min-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #111111;
+        }
+        @media (min-width: 640px) { .hero-title { font-size: 3rem; } }
+        @media (min-width: 768px) { .hero-title { font-size: 3.75rem; } }
+        @media (min-width: 1024px) { .hero-title { font-size: 4.5rem; } }
+        .hero-title span { color: var(--royal); }
+        .hero-text {
+            font-size: 1.125rem;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .btn-primary {
+            background-color: var(--royal);
+            color: white;
+            padding: 1rem 1.75rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: white;
+            color: var(--deep);
+            border: 1px solid var(--royal);
+        }
+        .btn-outline {
+            border: 2px solid var(--royal);
+            color: #111111;
+            padding: 1rem 1.75rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            background: transparent;
+            cursor: pointer;
+        }
+        .btn-outline:hover {
+            background-color: var(--royal);
+            color: white;
+        }
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2.5rem;
+            color: white;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--royal);
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            display: block;
+        }
+        .hero-image {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            border: 4px solid rgba(37,99,235,0.3);
+            min-height: 400px;
+            width: 100%;
+        }
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .order-1 { order: 1; }
+        .order-2 { order: 2; }
+        @media (min-width: 1024px) {
+            .order-1 { order: 1; }
+            .order-2 { order: 2; }
+        }
+
+        /* cards / quiz */
+        .farm-card { /* reuse as category card */
+            background: var(--card-bg);
+            border: 2px solid transparent;
+            border-radius: 28px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        .farm-card:hover {
+            border-color: var(--royal);
+            transform: scale(1.02);
+        }
+        .farm-card.selected {
+            border-color: var(--royal);
+            background-color: rgba(37,99,235,0.08);
+        }
+        .icon-circle {
+            width: 5rem;
+            height: 5rem;
+            margin: 0 auto 1rem;
+            border-radius: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+        .bg-olive-light { background-color: rgba(37,99,235,0.15); color: var(--royal); }
+        .bg-soil-light { background-color: rgba(37,99,235,0.08); color: var(--royal); }
+
+        .preview-card {
+            background: var(--card-bg);
+            border-radius: 2rem;
+            padding: 2rem;
+            border: 1px solid rgba(37,99,235,0.2);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+        .preview-grid {
+            display: grid;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media (min-width: 1024px) {
+            .preview-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .badge {
+            background-color: var(--royal);
+            color: white;
+            padding: 0.375rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: rgba(0,0,0,0.05);
+            border-radius: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: rgba(37,99,235,0.15);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--royal);
+            font-size: 1.25rem;
+        }
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--royal);
+        }
+        .price-old {
+            text-decoration: line-through;
+            opacity: 0.6;
+            margin-right: 0.5rem;
+        }
+        .btn-soil {
+            background-color: var(--royal);
+            color: white;
+            padding: 1rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            text-align: center;
+            display: block;
+            transition: 0.2s;
+        }
+        .btn-soil:hover { background-color: var(--deep); }
+
+        .preview-image {
+            border-radius: 1.5rem;
+            min-height: 380px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2022&auto=format&fit=crop');
+            width: 100%;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            position: relative;
+        }
+        @media (min-width: 768px) {
+            .steps-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        .step-item { text-align: center; position: relative; }
+        .step-circle {
+            width: 5rem;
+            height: 5rem;
+            background-color: rgba(37,99,235,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            border: 2px solid var(--royal);
+            font-size: 2rem;
+            color: var(--royal);
+        }
+        .step-circle.soil {
+            background-color: var(--royal);
+            border-color: var(--royal);
+            color: white;
+        }
+        .step-arrow::after {
+            content: '\f063';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: -10px;
+            top: 40px;
+            font-size: 1.4rem;
+            color: var(--royal);
+            opacity: 0.4;
+        }
+        @media (max-width: 768px) {
+            .step-arrow::after {
+                content: '\f078';
+                right: 50%;
+                top: auto;
+                bottom: -30px;
+                transform: translateX(50%);
+            }
+            .step-arrow { margin-bottom: 40px; }
+        }
+
+        .newsletter {
+            background-color: var(--royal);
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .newsletter-title {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+        .newsletter-text {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.25rem;
+            max-width: 36rem;
+            margin: 0 auto 2rem;
+        }
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 32rem;
+            margin: 0 auto;
+            gap: 0.75rem;
+        }
+        @media (min-width: 640px) {
+            .newsletter-form { flex-direction: row; }
+        }
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border-radius: 9999px;
+            border: 2px solid rgba(255,255,255,0.5);
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            outline: none;
+        }
+        .newsletter-input::placeholder { color: rgba(255,255,255,0.7); }
+        .newsletter-btn {
+            background-color: var(--deep);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .newsletter-btn:hover {
+            background-color: white;
+            color: var(--deep);
+        }
+        .seedling-icon {
+            position: absolute;
+            left: -2.5rem;
+            bottom: 0;
+            font-size: 8rem;
+            color: rgba(255,255,255,0.15);
+            transform: rotate(12deg);
+        }
+
+        .team-section {
+            background-color: var(--bg-secondary);
+            padding: 5rem 0;
+        }
+        .team-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media (min-width: 1024px) {
+            .team-flex { flex-direction: row; align-items: center; }
+        }
+        .team-content { width: 100%; }
+        @media (min-width: 1024px) { .team-content { width: 33.333%; } }
+        .team-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(2, 1fr);
+            width: 100%;
+        }
+        @media (min-width: 768px) {
+            .team-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (min-width: 1024px) { .team-grid { width: 66.666%; } }
+        .team-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(37,99,235,0.15);
+        }
+        .team-img {
+            width: 6rem;
+            height: 6rem;
+            margin: 0 auto 0.75rem;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--royal);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .team-name { font-weight: 700; margin-bottom: 0.25rem; }
+        .team-role { color: var(--royal); font-size: 0.75rem; }
+
+        .footer {
+            background-color: var(--deep);
+            color: white;
+            padding: 4rem 0;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .footer-logo-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--royal);
+        }
+        .footer-logo-icon i { color: var(--royal); font-size: 2rem; }
+        .footer-logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+        .footer-logo-text span { color: var(--royal); }
+        .footer-tagline {
+            font-size: 0.625rem;
+            color: #ccc;
+            display: block;
+            margin-top: -0.25rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        .footer-heading {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--royal);
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-links a {
+            color: #9ca3af;
+            transition: 0.2s;
+        }
+        .footer-links a:hover { color: var(--royal); }
+        .footer-input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 9999px;
+            margin-bottom: 0.5rem;
+            border: none;
+        }
+        .footer-btn {
+            width: 100%;
+            background-color: var(--royal);
+            color: white;
+            padding: 0.75rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .footer-btn:hover {
+            background-color: white;
+            color: var(--deep);
+        }
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+        #scroll-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--royal);
+            color: white;
+            border-radius: 50%;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            z-index: 100;
+            display: none;
+        }
+        #scroll-top:hover {
+            background-color: white;
+            color: var(--deep);
+        }
+        @media (min-width: 1280px) {
+            .desktop-nav { display: flex; }
+            .navbar-right-desktop { display: flex; }
+            .mobile-menu-btn { display: none; }
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.7s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        [style*="background-image"] {
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR (identical structure, no Dashboard) -->
+<nav class="navbar-container">
+    <div class="container navbar-flex">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-book-open"></i></div>
+            <div>
+                <div class="logo-text">Edu<span>Supplies</span></div>
+                <span class="logo-tagline">learn & grow</span>
+            </div>
+        </a>
+        <div class="desktop-nav">
+            <!-- Home dropdown replaces Dashboard -->
+            <div class="dropdown" id="Home-dropdown">
+                <div class="nav-link active" onclick="toggleDesktopDropdown('Home-dropdown')">Home <i class="fas fa-chevron-down dropdown-arrow"></i></div>
+                <div class="dropdown-menu">
+                    <a href="index.html" class="dropdown-item active">Home 1</a>
+                    <a href="home2.html" class="dropdown-item">Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="product.html" class="nav-link">Product</a>
+            <a href="pricing.html" class="nav-link">Pricing</a>
+            <a href="faq.html" class="nav-link">FAQ</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <!-- removed Dashboard -->
+        </div>
+        <div class="navbar-right-desktop">
+            <button class="icon-btn" id="desktop-theme-toggle"><i class="fas fa-circle-half-stroke" id="desktop-theme-icon"></i></button>
+            <button class="icon-btn" id="desktop-rtl-toggle"><i class="fas fa-right-left"></i></button>
+            <a href="login.html" class="login-btn"> Login</a>
+            <a href="register.html" class="login-btn">Register</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+</nav>
+
+<!-- mobile menu overlay (no Dashboard) -->
+<div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-header">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-book-open"></i></div>
+            <div>
+                <div class="logo-text">Edu<span>Supplies</span></div>
+                <span class="logo-tagline">learn & grow</span>
+            </div>
+        </a>
+        <button class="mobile-menu-close" id="close-mobile-menu"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mobile-menu-items">
+        <!-- Home dropdown -->
+        <div class="mobile-dropdown">
+            <button class="mobile-dropdown-btn" onclick="toggleMobileDropdown('Home-mobile')">
+                <span>Home</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="Home-mobile" class="mobile-dropdown-content">
+                <a href="index.html" class="active">Home 1</a>
+                <a href="home2.html">Home 2</a>
+            </div>
+        </div>
+        <a href="about.html" class="mobile-menu-item">About</a>
+        <a href="services.html" class="mobile-menu-item">Services</a>
+        <a href="product.html" class="mobile-menu-item">Product</a>
+        <a href="pricing.html" class="mobile-menu-item">Pricing</a>
+        <a href="faq.html" class="mobile-menu-item">FAQ</a>
+        <a href="contact.html" class="mobile-menu-item">Contact</a>
+        <!-- separator -->
+        <div class="mobile-separator"></div>
+        <button class="mobile-action-item" onclick="window.location.href='#'"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <button class="mobile-action-item" onclick="window.location.href='#'"><i class="fas fa-user-plus"></i> Register</button>
+        <button class="mobile-action-item" id="mobile-rtl-toggle"><i class="fas fa-right-left"></i> RTL</button>
+        <button class="mobile-action-item" id="mobile-theme-toggle"><i class="fas fa-circle-half-stroke" id="mobile-theme-icon"></i> Theme</button>
+    </div>
+</div>
+
+<!-- HERO (school theme) -->
+<section class="hero">
+    <div class="hero-pattern"></div>
+    <div class="container relative z-10">
+        <div class="hero-grid">
+            <div class="fade-in-up order-2 lg:order-1">
+                <span style="color: var(--royal); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 0.75rem;">📚 back to school</span>
+                <h1 class="hero-title">Everything for <span>classroom & home</span></h1>
+                <p class="hero-text">Notebooks, Pens, art supplies – curated for students, teachers, and lifelong learners.</p>
+                <div class="btn-group">
+                    <a href="#starter" class="btn-primary"><i class="fas fa-Homeping-bag"></i>Home now</a>
+                    <a href="#story" class="btn-outline"><i class="fas fa-book-open"></i>Our catalog</a>
+                </div>
+                <div class="stats" style="display:flex; gap:20px; justify-content:center; color:#1f2937;">
+                    <div>
+                        <span class="stat-number" style="font-size:1.5rem; font-weight:700; color:#2563EB;">2,000+</span>
+                        <span class="stat-label" style="font-size:0.9rem; color:#374151;">Products</span>
+                    </div>
+                    <div>
+                        <span class="stat-number" style="font-size:1.5rem; font-weight:700; color:#2563EB;">98%</span>
+                        <span class="stat-label" style="font-size:0.9rem; color:#374151;">Happy schools</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image order-1 lg:order-2">
+                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2022&auto=format&fit=crop" alt="School supplies" style="width:100%; height:100%; object-fit:cover;" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- QUIZ / CATEGORIES -->
+<section id="starter" style="background-color: var(--bg-primary); padding: 5rem 0;">
+    <div class="container">
+        <div style="text-align: center; max-width: 48rem; margin: 0 auto 3.5rem;">
+            <span style="color: var(--royal); font-weight: 700; font-size: 0.875rem; letter-spacing: 0.05em; text-transform: uppercase;">Home by category</span>
+            <h2 style="font-size: 2.5rem; margin: 1rem 0;">Find what you need</h2>
+            <p style="opacity: 0.8; font-size: 1.125rem;">From notebooks to novels – we've got you covered.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2,1fr); gap: 1.25rem; max-width: 64rem; margin: 0 auto;">
+            <div class="farm-card" onclick="this.classList.toggle('selected')"><div class="icon-circle bg-olive-light"><i class="fas fa-pencil-alt"></i></div><h3 style="font-weight: 700;">Stationery</h3><p style="font-size:0.875rem;">Pens, notebooks, folders</p></div>
+            <div class="farm-card" onclick="this.classList.toggle('selected')"><div class="icon-circle bg-soil-light"><i class="fas fa-book"></i></div><h3 style="font-weight: 700;">Educational</h3><p style="font-size:0.875rem;">Math, science, languages</p></div>
+            <div class="farm-card" onclick="this.classList.toggle('selected')"><div class="icon-circle bg-olive-light"><i class="fas fa-paint-brush"></i></div><h3 style="font-weight: 700;">Art & Craft</h3><p style="font-size:0.875rem;">Colors, clay, sketchbooks</p></div>
+            <div class="farm-card" onclick="this.classList.toggle('selected')"><div class="icon-circle bg-soil-light"><i class="fas fa-laptop"></i></div><h3 style="font-weight: 700;">Tech & Gear</h3><p style="font-size:0.875rem;">Calculators, bags, accessories</p></div>
+        </div>
+        <div style="text-align:center; margin-top:2.5rem;">
+            <button class="newsletter-btn" style="background:#2563EB; color:#fff; border:1px solid #2563EB;">Browse all</button>
+        </div>
+    </div>
+</section>
+
+<!-- PREVIEW (featured Product) -->
+<section style="background-color: var(--bg-secondary); padding: 5rem 0;">
+    <div class="container">
+        <div class="preview-card">
+            <div class="preview-grid">
+                <div>
+                    <span class="badge">📖 back to school bundle</span>
+                    <h2 style="font-size: 3rem; margin: 1.25rem 0;">Complete Study Kit</h2>
+                    <div>
+                        <div class="feature-item"><div class="feature-icon"><i class="fas fa-book"></i></div><div><h4 style="font-weight:700;">5 subject notebooks</h4><p style="font-size:0.875rem; opacity:0.7;">college ruled, 200 pages each</p></div></div>
+                        <div class="feature-item"><div class="feature-icon"><i class="fas fa-pen-fancy"></i></div><div><h4 style="font-weight:700;">Premium pen set</h4><p style="font-size:0.875rem; opacity:0.7;">12 gel pens + highlighters</p></div></div>
+                        <div class="feature-item"><div class="feature-icon"><i class="fas fa-calculator"></i></div><div><h4 style="font-weight:700;">Scientific calculator</h4><p style="font-size:0.875rem; opacity:0.7;">approved for exams</p></div></div>
+                    </div>
+                    <p style="margin:1.5rem 0;"><span class="price-old">$89</span> <span class="price">$59</span> / bundle</p>
+                    <a href="#" class="btn-soil">Add to cart</a>
+                </div>
+                <div class="preview-image" style="background-image:url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2070&auto=format&fit=crop');"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROCESS / STEPS -->
+<section style="background-color: var(--bg-primary); padding: 5rem 0;">
+    <div class="container">
+        <div style="text-align:center; margin-bottom:4rem;"><h2 style="font-size:3rem;">How it works</h2><p style="font-size:1.25rem; opacity:0.8;">from order to doorstep in 4 simple steps</p></div>
+        <div class="steps-grid">
+            <div class="step-item step-arrow"><div class="step-circle"><i class="fas fa-box-open"></i></div><h3 style="font-weight:700;">1. Choose</h3><p style="font-size:0.875rem;">Pick your supplies</p></div>
+            <div class="step-item step-arrow"><div class="step-circle"><i class="fas fa-credit-card"></i></div><h3 style="font-weight:700;">2. Order</h3><p style="font-size:0.875rem;">Secure checkout</p></div>
+            <div class="step-item step-arrow"><div class="step-circle"><i class="fas fa-truck"></i></div><h3 style="font-weight:700;">3. Delivery</h3><p style="font-size:0.875rem;">Fast shipping</p></div>
+            <div class="step-item"><div class="step-circle soil"><i class="fas fa-graduation-cap"></i></div><h3 style="font-weight:700;">4. Learn & grow</h3><p style="font-size:0.875rem;">Ready for class</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+    <div class="container" style="position:relative; z-index:10; text-align:center;">
+        <h2 class="newsletter-title">📬 Stay updated</h2>
+        <p class="newsletter-text">Get back‑to‑school deals, new arrivals & teaching resources.</p>
+        <div class="newsletter-form">
+            <input type="email" placeholder="your@email.com" class="newsletter-input" />
+            <button class="newsletter-btn">Subscribe</button>
+        </div>
+    </div>
+    <i class="fas fa-graduation-cap seedling-icon"></i>
+</section>
+
+<!-- TEAM / EDUCATORS -->
+<section class="team-section" style="padding:60px 0; background:#fff;">
+    <div class="container" style="width:90%; margin:auto;">
+        <div class="team-flex" style="display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap;">
+            <div class="team-content" style="flex:1; min-width:250px;">
+                <h2 style="font-size:3rem; margin-bottom:1rem; color:#111;">Our Educators</h2>
+                <p style="font-size:1.125rem; color:#444;">Teachers and curriculum experts who help us select the best supplies.</p>
+                <br />
+                <button class="newsletter-btn" style="padding:10px 20px; background:#2563EB; color:#fff; border:none; cursor:pointer;">Meet all →</button>
+            </div>
+            <div class="team-grid" style="flex:1.5; display:grid; grid-template-columns:repeat(4,1fr); gap:15px;" id="teamGrid">
+                <div class="team-card" style="background:#fafafa; padding:12px; text-align:center; border-radius:8px;">
+                    <div style="background-image:url('https://randomuser.me/api/portraits/women/44.jpg'); height:120px; background-size:cover; background-position:center; border-radius:6px;"></div>
+                    <h3 style="font-size:16px; margin-top:10px; color:#111;">Dr. Sarah Kim</h3>
+                    <p style="font-size:13px; color:#666;">curriculum lead</p>
+                </div>
+                <div class="team-card" style="background:#fafafa; padding:12px; text-align:center; border-radius:8px;">
+                    <div style="background-image:url('https://randomuser.me/api/portraits/men/32.jpg'); height:120px; background-size:cover; background-position:center; border-radius:6px;"></div>
+                    <h3 style="font-size:16px; margin-top:10px; color:#111;">James Okafor</h3>
+                    <p style="font-size:13px; color:#666;">math specialist</p>
+                </div>
+                <div class="team-card" style="background:#fafafa; padding:12px; text-align:center; border-radius:8px;">
+                    <div style="background-image:url('https://randomuser.me/api/portraits/women/68.jpg'); height:120px; background-size:cover; background-position:center; border-radius:6px;"></div>
+                    <h3 style="font-size:16px; margin-top:10px; color:#111;">Elena Velez</h3>
+                    <p style="font-size:13px; color:#666;">art & design</p>
+                </div>
+                <div class="team-card" style="background:#fafafa; padding:12px; text-align:center; border-radius:8px;">
+                    <div style="background-image:url('https://randomuser.me/api/portraits/men/75.jpg'); height:120px; background-size:cover; background-position:center; border-radius:6px;"></div>
+                    <h3 style="font-size:16px; margin-top:10px; color:#111;">David Chen</h3>
+                    <p style="font-size:13px; color:#666;">STEM coordinator</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+@media (max-width:768px){
+    #teamGrid { grid-template-columns:repeat(2,1fr) !important; }
+}
+</style>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">
+                    <div class="footer-logo-icon"><i class="fas fa-book-open"></i></div>
+                    <div>
+                        <div class="footer-logo-text" style="white-space:nowrap;">Edu<span>Supplies</span></div>
+                        <span class="footer-tagline">learn & grow</span>
+                    </div>
+                </div>
+                <p style="color:#9ca3af;">Quality Home I, Home 2 and learning tools for every age. Trusted by schools and parents.</p>
+            </div>
+            <div><h3 class="footer-heading">Quick links</h3><ul class="footer-links"><li><a href="#">Home</a></li><li><a href="#">About</a></li><li><a href="#">Services</a></li><li><a href="#">Product</a></li><li><a href="#">Pricing</a></li></ul></div>
+            <div>
+                <h3 class="footer-heading">Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Order Tracking</a></li>
+                    <li><a href="#">Return Policy</a></li>
+                </ul>
+            </div>
+            <div><h3 class="footer-heading">Stay connected</h3><form><input type="email" placeholder="Email address" class="footer-input" /><button class="footer-btn">Subscribe</button></form></div>
+        </div>
+        <div class="copyright">© 2026 EduSupplies – school Home I & Home 2.</div>
+    </div>
+</footer>
+
+<button id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+    // theme / rtl / dropdown logic (identical)
+    const htmlEl = document.documentElement;
+    const desktopTheme = document.getElementById('desktop-theme-toggle');
+    const mobileTheme = document.getElementById('mobile-theme-toggle');
+    const desktopIcon = document.getElementById('desktop-theme-icon');
+    const mobileIcon = document.getElementById('mobile-theme-icon');
+    const desktopRtl = document.getElementById('desktop-rtl-toggle');
+    const mobileRtl = document.getElementById('mobile-rtl-toggle');
+
+    let theme = localStorage.getItem('theme') || 'light';
+    htmlEl.setAttribute('data-theme', theme);
+    if (theme === 'dark') { htmlEl.classList.add('dark'); if(desktopIcon) desktopIcon.className = 'fas fa-sun'; if(mobileIcon) mobileIcon.className = 'fas fa-sun'; }
+
+    function toggleTheme() {
+        let isDark = htmlEl.getAttribute('data-theme') === 'dark';
+        let newTheme = isDark ? 'light' : 'dark';
+        htmlEl.setAttribute('data-theme', newTheme); localStorage.setItem('theme', newTheme);
+        if (newTheme === 'dark') htmlEl.classList.add('dark'); else htmlEl.classList.remove('dark');
+        if (desktopIcon) desktopIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-circle-half-stroke';
+        if (mobileIcon) mobileIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-circle-half-stroke';
+    }
+    if(desktopTheme) desktopTheme.addEventListener('click', toggleTheme);
+    if(mobileTheme) mobileTheme.addEventListener('click', toggleTheme);
+
+    function toggleRtl() { let dir = htmlEl.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl'; htmlEl.setAttribute('dir', dir); localStorage.setItem('direction', dir); }
+    if(desktopRtl) desktopRtl.addEventListener('click', toggleRtl);
+    if(mobileRtl) mobileRtl.addEventListener('click', toggleRtl);
+
+    function toggleDesktopDropdown(id) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+        document.getElementById(id).classList.toggle('active');
+    }
+    window.toggleDesktopDropdown = toggleDesktopDropdown;
+
+    function toggleMobileDropdown(id) {
+        document.getElementById(id).classList.toggle('active');
+    }
+    window.toggleMobileDropdown = toggleMobileDropdown;
+
+    // mobile menu
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('close-mobile-menu');
+
+    if(menuBtn) {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.add('active');
+        });
+    }
+    if(closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.remove('active');
+        });
+    }
+    mobileMenu.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) {
+            mobileMenu.classList.remove('active');
+        }
+    });
+
+    // scroll top
+    const scrollBtn = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) scrollBtn.style.display = 'block';
+        else scrollBtn.style.display = 'none';
+    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1280) mobileMenu.classList.remove('active');
+    });
+</script>
+</body>
+</html>
