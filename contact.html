@@ -474,9 +474,12 @@
         .contact-info-grid {
             display: grid;
             gap: 2rem;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
         }
-        @media (min-width: 768px) {
+        @media (min-width: 640px) {
+            .contact-info-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
             .contact-info-grid { grid-template-columns: repeat(4, 1fr); }
         }
         .contact-info-card {
@@ -486,6 +489,10 @@
             text-align: center;
             border: 1px solid rgba(37,99,235,0.08);
             transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
         }
         .contact-info-card:hover {
             border-color: var(--royal);
